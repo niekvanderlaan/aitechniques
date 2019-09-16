@@ -18,12 +18,37 @@ def the_cookie_problem():
     n_c = b.norm_constant("vanilla")
     print("normalizing constant for vanilla: %s" % n_c)
 
-    p_1 = b.single_posterior_update("vanilla", [0.5, 0.5])
-    print("vanilla - posterior: %s" % p_1)
+    q1 = b.single_posterior_update("vanilla", [0.5, 0.5])
+    print("Q1: Probability that vanilla came from bowl 1: %s" % q1[b.hs.index("Bowl1")])
 
-    p_2 = b.compute_posterior(['chocolate', 'vanilla'])
-    print("chocolate, vanilla - posterior: %s" % p_2)
+    b = Bayes(hypos, priors, obs, likelihood)
 
+    q2 = b.compute_posterior(['chocolate', 'vanilla'])
+    print("Q2: probability that [chocolate, vanilla] came from Bowl2: %s" % q2[b.hs.index("Bowl2")])
+
+def the_archery_problem():
+    print("===================")
+    print("THE ARCHERY PROBLEM")
+    print("===================")
+
+    hypos = ["beginner", "intermediate", "advanced", "expert"]
+    priors = [0.25, 0.25, 0.25, 0.25]
+    observations = ["yellow", "red", "blue", "black", "white"]
+    likelihood = [[0.05, 0.1, 0.4, 0.25, 0.2],
+                  [0.1, 0.2, 0.4, 0.2, 0.1],
+                  [0.2, 0.4, 0.25, 0.1, 0.05],
+                  [0.3, 0.5, 0.125, 0.05, 0.025]]
+
+    b = Bayes(hypos, priors, observations, likelihood)
+
+    result = b.compute_posterior(['yellow', 'white', 'blue', 'red', 'red', 'blue'])
+
+    q3 = result[b.hs.index('intermediate')]
+    q4 = b.hs[result.index(max(result))]
+    print("yellow, white, blue, red, red, blue - posterior: %s" % result)
+    print("Q3: Probability of the archer being at an intermediate level: %s" % q3)
+    print("Q4: Most likely level of the archer: %s" % q4)
 
 if __name__ == '__main__':
-    result = the_cookie_problem()
+    the_cookie_problem()
+    the_archery_problem()
