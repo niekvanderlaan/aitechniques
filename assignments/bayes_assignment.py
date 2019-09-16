@@ -1,4 +1,4 @@
-from aitechniques.core.Bayes import Bayes
+from core.Bayes import Bayes
 
 def the_cookie_problem():
     print("===================")
