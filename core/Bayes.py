@@ -1,4 +1,4 @@
-class Bayes:
+class Bayes(object):
     def __init__(self, hs, ps, os, ls):
         # List of hypothesis
         self.hs = hs.copy()
@@ -52,6 +52,10 @@ class Bayes:
         return posteriors
 
 if __name__ == '__main__':
+
+    print("===================")
+    print("THE COOKIE PROBLEM")
+    print("===================")
     hypos = ["Bowl1", "Bowl2"]
     priors = [0.5, 0.5]
     obs = ["chocolate", "vanilla"]
@@ -71,6 +75,12 @@ if __name__ == '__main__':
 
     p_2 = b.compute_posterior(['chocolate', 'vanilla'])
     print("chocolate, vanilla - posterior: %s" % p_2)
+
+    print("===================")
+    print("THE ARCHERY PROBLEM")
+    print("===================")
+
+    priors = [0.5]
 
 
 
