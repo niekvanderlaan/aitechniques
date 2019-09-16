@@ -40,6 +40,17 @@ class Bayes:
             posteriors.append((self.ps[i]*self.likelihood(o, h))/self.norm_constant(o))
         return posteriors
 
+    # Computes all posterior probabilities for each observation given
+    # e.g. if we have 2 hypothesis h1 and h2 in self.hs,
+    # and os consists of 2 observations o1 and o2,
+    # We return [ [P(h1|o1), P[h2|o1], [P[h1|o2], P[h2|o2] ]
+    def compute_posterior(self, os):
+        posteriors = []
+        for i, o in enumerate(os):
+            posteriors.append(self.single_posterior_update(o, self.ps))
+
+        return posteriors
+
 if __name__ == '__main__':
     hypos = ["Bowl1", "Bowl2"]
     priors = [0.5, 0.5]
@@ -57,6 +68,9 @@ if __name__ == '__main__':
 
     p_1 = b.single_posterior_update("vanilla", [0.5, 0.5])
     print("vanilla - posterior: %s" % p_1)
+
+    p_2 = b.compute_posterior(['chocolate', 'vanilla'])
+    print("chocolate, vanilla - posterior: %s" % p_2)
 
 
 
