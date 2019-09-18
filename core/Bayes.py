@@ -35,7 +35,7 @@ class Bayes(object):
         posteriors = []
         for i, h in enumerate(self.hs):
             # Calculate P(h|o) for each hypothesis h given observation o
-            posteriors.append((self.ps[i]*self.likelihood(o, h))/self.norm_constant(o))
+            posteriors.append((ps[i]*self.likelihood(o, h))/self.norm_constant(o))
 
         # update priors
         self.ps = posteriors.copy()
